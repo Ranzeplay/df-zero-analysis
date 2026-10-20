@@ -51,8 +51,25 @@ public enum ZeroAbstractValue {
      * @return the result of the addition.
      */
     public ZeroAbstractValue add(ZeroAbstractValue another) {
-          // TODO: IMPLEMENT
-          throw new UnsupportedOperationException();
+        if(this.equals(BOTTOM) || another.equals(BOTTOM))
+            return BOTTOM;
+
+        if((this.equals(POSITIVE) && another.equals(POSITIVE)) ||
+            (this.equals(POSITIVE) && another.equals(ZERO)) ||
+            (this.equals(ZERO) && another.equals(POSITIVE))
+        )
+            return POSITIVE;
+        
+        if((this.equals(NEGATIVE) && another.equals(NEGATIVE)) ||
+            (this.equals(ZERO) && another.equals(NEGATIVE)) ||
+            (this.equals(NEGATIVE) && another.equals(ZERO))
+        )
+            return NEGATIVE;
+
+        if(this.equals(ZERO) && another.equals(ZERO))
+            return ZERO;
+
+        return TOP;
     }
 
     /**
@@ -61,8 +78,23 @@ public enum ZeroAbstractValue {
      * @return the result of the division.
      */
     public ZeroAbstractValue divideBy(ZeroAbstractValue another) {
-        // TODO: IMPLEMENT
-        throw new UnsupportedOperationException();
+        if(this.equals(BOTTOM) || another.equals(BOTTOM) || another.equals(ZERO))
+            return ZeroAbstractValue.BOTTOM;
+
+        if((this.equals(POSITIVE) && another.equals(POSITIVE)) ||
+           (this.equals(NEGATIVE) && another.equals(NEGATIVE))
+        )
+            return POSITIVE;
+
+        if((this.equals(POSITIVE) && another.equals(NEGATIVE)) ||
+           (this.equals(NEGATIVE) && another.equals(POSITIVE))
+        )
+            return NEGATIVE;
+
+        if(this.equals(ZERO))
+            return ZERO;
+
+        return TOP;
     }
 
     /**
@@ -71,8 +103,23 @@ public enum ZeroAbstractValue {
      * @return the result of the multiplication.
      */
     public ZeroAbstractValue multiplyBy(ZeroAbstractValue another) {
-        // TODO: IMPLEMENT
-        throw new UnsupportedOperationException();
+        if(this.equals(BOTTOM) || another.equals(BOTTOM))
+            return BOTTOM;
+
+        if(this.equals(ZERO) || another.equals(ZERO))
+            return ZERO;
+
+        if((this.equals(POSITIVE) && another.equals(POSITIVE)) ||
+           (this.equals(NEGATIVE) && another.equals(NEGATIVE))
+        )
+            return POSITIVE;
+
+        if((this.equals(POSITIVE) && another.equals(NEGATIVE)) ||
+           (this.equals(NEGATIVE) && another.equals(POSITIVE))
+        )
+            return NEGATIVE;
+
+        return TOP;
     }
 
     /**
@@ -81,8 +128,23 @@ public enum ZeroAbstractValue {
      * @return the result of the subtraction.
      */
     public ZeroAbstractValue substract(ZeroAbstractValue another) {
-        // TODO: IMPLEMENT
-        throw new UnsupportedOperationException();
+        if(this.equals(BOTTOM) || another.equals(BOTTOM))
+            return BOTTOM;
+
+        if((this.equals(POSITIVE) && another.equals(NEGATIVE)) ||
+           (this.equals(ZERO) && another.equals(NEGATIVE))
+        )
+            return POSITIVE;
+        
+        if((this.equals(NEGATIVE) && another.equals(POSITIVE)) ||
+           (this.equals(NEGATIVE) && another.equals(ZERO))
+        )
+            return NEGATIVE;
+
+        if(this.equals(ZERO) && another.equals(ZERO))
+            return ZERO;
+
+        return TOP;
     }
 
     /**
@@ -91,8 +153,16 @@ public enum ZeroAbstractValue {
      * @return the result of the merge.
      */
     public ZeroAbstractValue merge(ZeroAbstractValue another) {
-        // TODO: IMPLEMENT
-        throw new UnsupportedOperationException();
+        if(this.equals(BOTTOM)) {
+            return another;
+        }
+        if(another.equals(BOTTOM)) {
+            return this;
+        }
+
+        if (this.equals(another)) return this;
+
+        return TOP;
     }
 
 }

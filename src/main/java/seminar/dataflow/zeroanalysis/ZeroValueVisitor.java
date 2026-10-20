@@ -71,8 +71,7 @@ public class ZeroValueVisitor extends AbstractValueVisitor<ZeroAbstractValue> {
      ***/
     private boolean maybeZeroOperand(ZeroAbstractValue operand)
     {
-        // TODO: IMPLEMENT.
-        throw new UnsupportedOperationException();
+        return operand.equals(ZeroAbstractValue.TOP) || operand.equals(ZeroAbstractValue.ZERO);
     }
     /**
      * This method is called when the expression being analyzed is a multiplication.
@@ -111,8 +110,13 @@ public class ZeroValueVisitor extends AbstractValueVisitor<ZeroAbstractValue> {
      */
     @Override
     public void visitIntegerConstant(int value) {
-        // TODO: IMPLEMENT.
-        throw new UnsupportedOperationException();
+        if(value > 0) {
+            resolvedValue = ZeroAbstractValue.POSITIVE;
+        } else if (value < 0) {
+            resolvedValue = ZeroAbstractValue.NEGATIVE;
+        } else {
+            resolvedValue = ZeroAbstractValue.ZERO;
+        }
     }
 
     /**

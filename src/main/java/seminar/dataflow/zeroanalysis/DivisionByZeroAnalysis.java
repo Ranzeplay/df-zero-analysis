@@ -104,8 +104,8 @@ public class DivisionByZeroAnalysis extends AbstractDataflowAnalysis<Stmt, ZeroA
      */
     @Override
     public void meetInto(ZeroAbstractState fact, ZeroAbstractState target) {
-        // TODO: IMPLEMENT
-        throw new UnsupportedOperationException("Operation is not implemented yet.");
+        var out = target.union(fact);
+        out.getDefinedVariables().forEach(k -> target.setValue(k, out.getValue(k)));
     }
 
     /**
