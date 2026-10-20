@@ -79,7 +79,7 @@ public enum ZeroAbstractValue {
      */
     public ZeroAbstractValue divideBy(ZeroAbstractValue another) {
         if(this.equals(BOTTOM) || another.equals(BOTTOM) || another.equals(ZERO))
-            return ZeroAbstractValue.BOTTOM;
+            return BOTTOM;
 
         if((this.equals(POSITIVE) && another.equals(POSITIVE)) ||
            (this.equals(NEGATIVE) && another.equals(NEGATIVE))
